@@ -131,7 +131,7 @@ h1#logo a { display:block; background:url(../images/bg-logo.png) center no-repea
 body.light h1#logo a { background:url(../images/bg-logo-light.png) center no-repeat; background-size:117px 40px; }
 .tagline { float:left; font-family:"Open Sans", Arial, Helvetica, sans-serif; font-size:12px; font-weight:400; padding:0 0 0 16px; margin:0px auto; position:relative; display:table; height:82px; margin-top:-1px; line-height:1.3; color:#a5a5a5; font-style:italic }
 .tagline span { vertical-align:middle; display:table-cell }
-h2, h3, h4, h5 { line-height:1.5; color:#aaaacc; display:block; position:relative; margin-top:14px; font-family:'Oswald', Georgia, "Times New Roman", Times, firakatiFont, serif; text-transform:uppercase; letter-spacing:2px; font-weight:400; }
+h2, h3, h4, h5 { line-height:1.5; color:#FFFFFF; display:block; position:relative; margin-top:14px; font-family:'Oswald', Georgia, "Times New Roman", Times, firakatiFont, serif; text-transform:uppercase; letter-spacing:2px; font-weight:400; }
 h1 { font-family:"Open Sans", Arial, Helvetica, sans-serif; font-size: 50px; line-height: 62px; color: #aaaacc; font-weight: 700; }
 h2 {font-family: firakatiFont; font-size:24px; line-height:33px; font-weight: 900}
 .white h2 { border-bottom:1px solid #555; padding-bottom:27px; margin-bottom:26px; }
@@ -156,10 +156,10 @@ h5 { font-size:12px; }
 .toggle-inline { display:inline-block !important }
 #main-nav { position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); background-color: transparent; padding: 0; position: relative; width: auto; z-index: 2000; height:82px; display:table; margin: auto; }
 #main-nav ul { padding: 0 2px 0 10px; display:table-cell; vertical-align:middle; }
-#main-nav a { text-decoration: none; color: #8E8E8E; font-size: 13px; font-family: firakatiFont; letter-spacing: 10px;}
+#main-nav a {color: #8E8E8E; font-size: 20px; font-family: firakatiFont; letter-spacing: 10px;}
 #main-nav a.dead-link { color:#8E8E8E !important; cursor:default }
 #main-nav > ul a { text-transform: uppercase; }
-#main-nav li a:hover, #options li a.selected { color: #000000; }
+#main-nav li a:hover, #options li a.selected { color: #FFFFFF; }
 body.light #main-nav li a:hover, body.light #options li a.selected {color:#2b2b2b }
 #main-nav > ul > li { float: left; padding: 7px 0 17px 0px; margin:0 10px; position: relative; margin-top:5px; }
 #main-nav .social-links { padding: 0; display:table-cell; vertical-align:middle; }
