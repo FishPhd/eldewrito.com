@@ -62,7 +62,7 @@
 
 /* =2. Preloader
 --------------------------------------------------------------------------------------------------------*/
-#preloader { position:fixed; top:0; left:0; right:0; bottom:0; background:#FDFFFF; border-color: white; z-index:9999; }
+#preloader { position:fixed; top:0; left:0; right:0; bottom:0; background:#252525; border-color: white; z-index:9999; }
 body.light #preloader {background:#f2f2f2 }
 #status { z-index:28; position:absolute; top:50%; height:220px; width:100%; margin-top:-115px; }
 /* horizontal centering */
@@ -98,8 +98,8 @@ body.light #preloader {background:#f2f2f2 }
 
 html { overflow: -moz-scrollbars-vertical; overflow-y: scroll; -webkit-text-size-adjust: 100%; -webkit-font-smoothing:antialiased; }
 /*body { font-size: 20px; font-family: "Lora", Georgia, "Times New Roman", Times, serif; color:#555; background:#F5FFFF; height:100% } Original Parameters*/
-body { font-size: 20px; font-family: firakatiFont, Times, serif; font-weight: bolder; letter-spacing: 1px; color:#555; background:#FDFFFF; height:100% }
-body.light {background:#f2f2f2 }
+body { font-size: 20px; font-family: firakatiFont, Times, serif; font-weight: bolder; letter-spacing: 1px; color:#555; background:#252525; height:100% }
+body.light {background:#252525 }
 strong { font-weight:600; }
 em { font-size:17px; }
 a, a > * { -webkit-transition: all 0.2s ease 0s; -moz-transition: all 0.2s ease 0s; -o-transition: all 0.2s ease 0s; transition: all 0.2s ease 0s; }

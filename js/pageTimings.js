@@ -9,7 +9,7 @@ jQuery(window).load(function () {
 		$("#form-2").animate({ opacity: 0 });
     }, 100);
 
-	//Animate the words on the home page
+	/*Animate the words on the home page
     setTimeout(function () {
         $("#h2-1").animate({ opacity: 1 }, 3000);
     }, 1500);
@@ -22,12 +22,15 @@ jQuery(window).load(function () {
     setTimeout(function () {
         $("#h2-4").animate({ opacity: 1 }, 3000);
     }, 4500);
+    */
     setTimeout(function () {
         $("#form-1").animate({ opacity: 1 });
-    }, 5000);
+    }, 1500);
+    /*
 	setTimeout(function () {
         $("#form-2").animate({ opacity: 1 });
     }, 4250);
+    */
 	//Animate the lines on the home page
 	setTimeout(function(){
 	$("#homeDividerLine-1")
@@ -40,7 +43,7 @@ jQuery(window).load(function () {
 	
 	.delay(200)
 	.velocity({ x: "0%", y: "0%", width: "100%"});
-	},4750);
+	},2000);
 	
 	setTimeout(function(){
 	$("#homeDividerLine-2")
@@ -53,6 +56,6 @@ jQuery(window).load(function () {
 	
 	.delay(200)
 	.velocity({ x: "0%", y: "0%", width: "100%"});
-	},4750);
+	},2000);
 	
 });
