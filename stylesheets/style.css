@@ -41,6 +41,16 @@
 	  margin-top: 10px;
 	  margin-bottom: 10px;
 }
+#project {
+	  width: 10%;
+	  height: 50px;
+      border-width: 0px;
+      color: #252525;
+      background-color: #33b5e5;
+	  margin-top: 10px;
+      font-size: 20px;
+	  margin-bottom: 10px;
+}
 
 #refresh:hover {
 	background-color: rgba(255, 255, 255, 0.15);

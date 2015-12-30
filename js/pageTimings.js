@@ -56,6 +56,6 @@ jQuery(window).load(function () {
 	
 	.delay(200)
 	.velocity({ x: "0%", y: "0%", width: "100%"});
-	},2000);
+	},1000);
 	
 });
