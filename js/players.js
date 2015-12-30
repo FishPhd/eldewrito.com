@@ -4,7 +4,10 @@
 */
 
 $(document).ready(function () {
-	initalizePlayerCount();
+	initalizePlayerCount()
+    $("#refresh").click(function() {
+        initalizePlayerCount();
+    });
 });
 
 function initalizePlayerCount() {
