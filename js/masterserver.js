@@ -1,3 +1,5 @@
+var totalPlayers=0;
+
 if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
     connect: function (address) {
         prompt('Use the browser in-game\nOr type/paste this in the console (F1 or `)', 'server.connect ' + address);
@@ -6,12 +8,11 @@ if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
 };
 
 $(document).ready(function() {
-    //queryServer("192.99.124.162/list");
-    //addServer("127.0.0.1:11775", "Test server", "emoose", "Guardian", "guardian", "Team Slayer", "1", "16");
     updateServerList();
     masterserverLoop();
     $("#refresh").click(function() {
         $("#serverlist > tbody").empty();
+        totalPlayers=0;
         updateServerList();
     });
 });
@@ -70,7 +71,7 @@ function getServerList(success, ms) {
 
 function updateServerList() {
     //$("#serverlist > tbody").empty();
-
+    totalPlayers=0;
     getServerList(function( data ) {
         if(data.result.code != 0) {
             alert("Error received from master: " + data.result.msg);
@@ -80,7 +81,7 @@ function updateServerList() {
         for(var i = 0; i < data.result.servers.length; i++) {
             var serverIP = data.result.servers[i];
             queryServer(serverIP);
-        }
+        }  
     });
 }
     
@@ -180,13 +181,15 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servGameType = "<td>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td>" + status + "</td>";
-    var servPlayers = "<td id=\x22" + ip + "\x22>" + numplayers + "/" + maxplayers + "</td>";
+    var servPlayers = "<td id=\x22" + ip + "\x22 id=\x22player\x22>" + numplayers + "/" + maxplayers + "</td>";
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
     
+    
+    
     //$('#serverlist tr:last').after
     if(document.getElementById(ip) == null){
-        $('#serverlist > tbody').append("<tr class=\x22" + ip + "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
     }else{
         document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
     }
@@ -195,6 +198,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         $("tbody").remove("."+ip);
     }
     */
+    totalPlayers+=numplayers;
+    document.getElementById("players-online").innerHTML = totalPlayers + " Players Online";
 }
 
 function masterserverLoop() {
