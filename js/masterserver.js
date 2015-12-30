@@ -189,5 +189,5 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
 
     //$('#serverlist tr:last').after
-    $('#serverlist > tbody').append("<tr onclick=\"" + onclick + "\">" + servName + servIP + servGameType + servMap +  servPlayers + "</tr>");
+    $('#serverlist > tbody').append("<tr onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
 }
