@@ -203,5 +203,5 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
 }
 
 function masterserverLoop() {
-	setInterval(updateServerList, 3000);
+	setInterval(updateServerList, 5000);
 }
