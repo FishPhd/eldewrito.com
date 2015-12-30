@@ -187,12 +187,14 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     //$('#serverlist tr:last').after
     if(document.getElementById(ip) == null){
         $('#serverlist > tbody').append("<tr class=\x22" + ip + "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
-    }
-    else if(invalidServer){
-        $("tbody").remove("."+ip);
     }else{
         document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
     }
+    /*
+    else if(invalidServer){
+        $("tbody").remove("."+ip);
+    }
+    */
 }
 
 function masterserverLoop() {
