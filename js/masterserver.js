@@ -8,10 +8,10 @@ if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
 $(document).ready(function() {
     //queryServer("192.99.124.162/list");
     //addServer("127.0.0.1:11775", "Test server", "emoose", "Guardian", "guardian", "Team Slayer", "1", "16");
+    updateServerList();
     $("#refresh").click(function() {
         updateServerList();
     });
-    updateServerList();
 });
 
 var masterServers = [

@@ -4,9 +4,9 @@
 */
 
 $(document).ready(function () {
-	initalizePlayerCount()
+	initalizePlayerCount();
     $("#refresh").click(function() {
-        initalizePlayerCount();
+        getTotalPlayers();
     });
 });
 
@@ -31,5 +31,5 @@ function getTotalPlayers() {
 }
 
 function totalPlayersLoop() {
-	setInterval(getTotalPlayers, 30000);
+	setInterval(getTotalPlayers, 5000);
 }

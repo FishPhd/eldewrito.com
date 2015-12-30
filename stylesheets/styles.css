@@ -456,3 +456,96 @@ img.dark {background:#000; opacity:0.5 }
 #main-nav > ul > li { padding:0px; margin-top:-1px; }
 /* =End Update 1.1
 --------------------------------------------------------------------------------------------------------*/
+
+/* TABLES FOR SERVER BROWSER */
+
+.column
+{
+	float: left;
+	width: 100%;
+}
+
+.clear
+{
+	clear: both;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+}	
+
+/*Main
+-----------------------------*/
+
+#players-online {
+    font-size: 32px;
+    color: #33b5e5;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#browser-title {
+    font-weight: 700;
+    font-size: 50px;
+    padding-top:5px;
+    color: #fff;
+	color:white;
+    background: -webkit-linear-gradient(#fff, #999);
+}
+
+#refresh {
+	  width: 10%;
+	  height: 30px;
+      border-width: 0px;
+      color: #252525;
+      background-color: #33b5e5;
+	  margin-top: 10px;
+	  margin-bottom: 10px;
+}
+#project {
+	  width: 10%;
+	  height: 50px;
+      border-width: 0px;
+      color: #252525;
+      background-color: #33b5e5;
+	  margin-top: 10px;
+      font-size: 20px;
+	  margin-bottom: 10px;
+}
+
+#refresh:hover {
+	background-color: rgba(255, 255, 255, 0.15);
+}
+
+#serverlist
+{
+	color:White;
+	margin-bottom:0px;
+	font-size:30px;
+	width: 100%;
+}
+
+#serverlist > tbody > tr {
+	cursor: pointer;
+}
+
+
+/*Tables	
+-----------------------------*/
+table {
+	margin-bottom:0px;
+    border-spacing:0px;
+}
+
+th {
+	font-weight:bold;
+    text-align: center;
+}
+
+tbody{
+    font-size: 20px;
+}
+
+td, th {
+    padding: 15px 10px;
+}
