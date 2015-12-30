@@ -31,5 +31,5 @@ function getTotalPlayers() {
 }
 
 function totalPlayersLoop() {
-	setInterval(getTotalPlayers, 5000);
+	setInterval(getTotalPlayers, 3000);
 }

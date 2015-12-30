@@ -9,7 +9,9 @@ $(document).ready(function() {
     //queryServer("192.99.124.162/list");
     //addServer("127.0.0.1:11775", "Test server", "emoose", "Guardian", "guardian", "Team Slayer", "1", "16");
     updateServerList();
+    masterserverLoop();
     $("#refresh").click(function() {
+        $("#serverlist > tbody").empty();
         updateServerList();
     });
 });
@@ -73,7 +75,7 @@ function getServerList(success, ms) {
 }
 
 function updateServerList() {
-    $("#serverlist > tbody").empty();
+    //$("#serverlist > tbody").empty();
 
     getServerList(function( data ) {
         if(data.result.code != 0) {
@@ -184,10 +186,18 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servGameType = "<td>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td>" + status + "</td>";
-    var servPlayers = "<td>" + numplayers + "/" + maxplayers + "</td>";
+    var servPlayers = "<td id=\x22" + ip + "\x22>" + numplayers + "/" + maxplayers + "</td>";
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
-
+    
     //$('#serverlist tr:last').after
-    $('#serverlist > tbody').append("<tr onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+    if(document.getElementById(ip) == null){
+        $('#serverlist > tbody').append("<tr onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+    }else{
+        document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
+    }
+}
+
+function masterserverLoop() {
+	setInterval(updateServerList, 3000);
 }
