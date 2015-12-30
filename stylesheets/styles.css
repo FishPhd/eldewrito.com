@@ -156,7 +156,7 @@ h5 { font-size:12px; }
 .toggle-inline { display:inline-block !important }
 #main-nav { position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); background-color: transparent; padding: 0; position: relative; width: auto; z-index: 2000; height:82px; display:table; margin: auto; }
 #main-nav ul { padding: 0 2px 0 10px; display:table-cell; vertical-align:middle; }
-#main-nav a {color: #8E8E8E; font-size: 20px; font-family: firakatiFont; letter-spacing: 10px; margin-right: 40px;}
+#main-nav a {color: #8E8E8E; font-size: 20px; font-family: firakatiFont; letter-spacing: 10px; margin-right: 30px;}
 #main-nav a.dead-link { color:#8E8E8E !important; cursor:default }
 #main-nav > ul a { text-transform: uppercase; }
 #main-nav li a:hover, #options li a.selected { color: #FFFFFF; }
