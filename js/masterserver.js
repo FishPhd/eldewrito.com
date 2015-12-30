@@ -1,22 +1,21 @@
 var totalPlayers=0;
-
+ 
 if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
     connect: function (address) {
         prompt('Use the browser in-game\nOr type/paste this in the console (F1 or `)', 'server.connect ' + address);
     },
     def: true
 };
-
+ 
 $(document).ready(function() {
     updateServerList();
     masterserverLoop();
     $("#refresh").click(function() {
         $("#serverlist > tbody").empty();
-        totalPlayers=0;
         updateServerList();
     });
 });
-
+ 
 var masterServers = [
     {
         "list": "http://samantha-master.halo.click/list",
@@ -48,7 +47,7 @@ var masterServers = [
         "stats": "http://nothing-michaeljohn21312.c9.io/stats"
     }
     ], currentMS = 0, startMS = currentMS;
-
+ 
 function getServerList(success, ms) {
     if (typeof ms !== 'number') ms = startMS = currentMS;
     ms = Math.min(Math.max(0, ms), masterServers.length);
@@ -68,10 +67,9 @@ function getServerList(success, ms) {
         }
     });
 }
-
+ 
 function updateServerList() {
     //$("#serverlist > tbody").empty();
-    totalPlayers=0;
     getServerList(function( data ) {
         if(data.result.code != 0) {
             alert("Error received from master: " + data.result.msg);
@@ -81,10 +79,12 @@ function updateServerList() {
         for(var i = 0; i < data.result.servers.length; i++) {
             var serverIP = data.result.servers[i];
             queryServer(serverIP);
-        }  
+        }
     });
+    document.getElementById("players-online").innerHTML = totalPlayers + " Players Online";
+    totalPlayers=0;
 }
-    
+   
 function queryServer(serverIP) {
     console.log(serverIP);
     if (!validateIP(serverIP)) return; //this makes more sense here
@@ -96,9 +96,9 @@ function queryServer(serverIP) {
         var isPassworded = serverInfo.passworded !== undefined;
         //if no serverInfo.map, they jumped into an active game without unannouncing their server, causing a duplicate unjoinable game
         if(!serverInfo.map) return;
-        
-	    //if any variables include js tags, skip them
-	    if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
+       
+        //if any variables include js tags, skip them
+        if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
             $.ajax({
                 url: 'http://www.telize.com/geoip/' + serverIP.split(':')[0],
                 dataType: 'json',
@@ -116,7 +116,7 @@ function queryServer(serverIP) {
         }
     });
 }
-
+ 
 function promptPassword(serverIP) {
     var password = prompt("The server at " + serverIP + " is passworded, enter the password to join", "");
     if(password)
@@ -124,7 +124,7 @@ function promptPassword(serverIP) {
     else if (callbacks.def)
         callbacks.connect(serverIP + ' <password>');
 }
-
+ 
 function sanitizeString(str) {
     return String(str).replace(/(<([^>]+)>)/ig,"") //shouldn't need to strip tags with the below replacements, but I'll keep it anyway
                       .replace(/&/g, '&amp;')
@@ -133,22 +133,22 @@ function sanitizeString(str) {
                       .replace(/'/g, '&#39;')
                       .replace(/"/g, '&quot;');
 }
-
+ 
 function validateIP(str) {
     if (str) {
         str = String(str);
-		if(/^(?:(?:2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d)\.){3}(?:2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d)(?:\:(?:\d|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5]))?$/i.test(str)) {
-			return true;
-		} else{
-			console.log(str + " is not a valid ip, skipping");
-			return false;
-		}
-	} else {
-    	console.log(str + " is not a valid ip, skipping");
+        if(/^(?:(?:2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d)\.){3}(?:2[0-4]\d|25[0-5]|1\d{2}|[1-9]?\d)(?:\:(?:\d|[1-9]\d{1,3}|[1-5]\d{4}|6[0-4]\d{3}|65[0-4]\d{2}|655[0-2]\d|6553[0-5]))?$/i.test(str)) {
+            return true;
+        } else{
+            console.log(str + " is not a valid ip, skipping");
+            return false;
+        }
+    } else {
+        console.log(str + " is not a valid ip, skipping");
         return false;
-	}
+    }
 }
-
+ 
 function invalidServer() {
     if (/[<>]/.test(Array.prototype.slice.call(arguments).join(''))) {
         console.log("Javascript potentially in one of the variables, skipping server");
@@ -157,7 +157,7 @@ function invalidServer() {
         return false;
     }
 }
-
+ 
 function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status, numplayers, maxplayers, version, ping, geoloc) {
     //because people can't be trusted with html, filter it out
     name = sanitizeString(name).substring(0,50);
@@ -169,39 +169,37 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     numplayers = parseInt(numplayers);
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
-
+ 
     if (geoloc && geoloc.country_code) name = '[' + sanitizeString(geoloc.country_code) + (geoloc.region_code ? '-' + sanitizeString(geoloc.region_code) : '') + '] ' + name;
-
+ 
     if (isPassworded) name = '[\uD83D\uDD12] ' + name;
-
+ 
     if (version) name = '[' + version + '] ' + name;
-
+ 
     var servName = "<td>" + name  + " <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td>" + map + " (" + mapfile + ")" +  "</td>";
     var servGameType = "<td>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td>" + status + "</td>";
     var servPlayers = "<td id=\x22" + ip + "\x22 id=\x22player\x22>" + numplayers + "/" + maxplayers + "</td>";
-    
+   
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
-    
-    
-    
-    //$('#serverlist tr:last').after
+   
     if(document.getElementById(ip) == null){
         $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
     }else{
         document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
     }
+   
     /*
     else if(invalidServer){
         $("tbody").remove("."+ip);
     }
     */
+   
     totalPlayers+=numplayers;
-    document.getElementById("players-online").innerHTML = totalPlayers + " Players Online";
 }
-
+ 
 function masterserverLoop() {
-	setInterval(updateServerList, 5000);
+    setInterval(updateServerList, 1000);  
 }
