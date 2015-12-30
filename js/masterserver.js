@@ -18,41 +18,35 @@ $(document).ready(function() {
 
 var masterServers = [
     {
-        "list": "http://eldewrito.red-m.net/list",
-        "announce": undefined, //red_m's server doesn't have these
-        "stats": undefined
-    },
-    {
-        "list": "http://192.99.124.162/list",
-        "announce": "http://192.99.124.162/announce",
-        "stats": "http://192.99.124.162/stats"
-    },
-    {
         "list": "http://samantha-master.halo.click/list",
         "announce": "http://samantha-master.halo.click/announce",
         "stats": "http://samantha-master.halo.click/stats"
-    },
-    {
+    }, {
+        "list": "http://192.99.124.162/list",
+        "announce": "http://192.99.124.162/announce",
+        "stats": "http://192.99.124.162/stats"
+    }, {
+        "list": "http://eldewrito.red-m.net/list",
+        "announce": "http://eldewrito.red-m.net/announce",
+        "stats": "http://eldewrito.red-m.net/stats"
+    }, {
+        "list": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/list",
+        "announce": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/announce",
+        "stats": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/stats"
+    }, {
         "list": "http://eldewrito-masterserver-thetwist84.c9.io/list",
         "announce": "http://eldewrito-masterserver-thetwist84.c9.io/announce",
         "stats": "http://eldewrito-masterserver-thetwist84.c9.io/stats"
-    },
-    {
+    }, {
         "list": "http://eldewrito-masterserver-1-thetwist84.c9.io/list",
         "announce": "http://eldewrito-masterserver-1-thetwist84.c9.io/announce",
         "stats": "http://eldewrito-masterserver-1-thetwist84.c9.io/stats"
-    },
-    {
-        "list": "http://80.240.130.4:8117/list",
-        "announce": "http://80.240.130.4:8117/announce",
-        "stats": "http://80.240.130.4:8117/stats"
-    },
-    {
-        "list": "http://eldewrito-masterserver-personality.c9.io/list",
-        "announce": "http://eldewrito-masterserver-personality.c9.io/announce",
-        "stats": "http://eldewrito-masterserver-personality.c9.io/stats"
+    }, {
+        "list": "http://nothing-michaeljohn21312.c9.io/list",
+        "announce": "http://nothing-michaeljohn21312.c9.io/announce",
+        "stats": "http://nothing-michaeljohn21312.c9.io/stats"
     }
-], currentMS = 0, startMS = currentMS;
+    ], currentMS = 0, startMS = currentMS;
 
 function getServerList(success, ms) {
     if (typeof ms !== 'number') ms = startMS = currentMS;
@@ -192,7 +186,10 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     //$('#serverlist tr:last').after
     if(document.getElementById(ip) == null){
-        $('#serverlist > tbody').append("<tr onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+        $('#serverlist > tbody').append("<tr class=\x22" + ip + "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+    }
+    else if(invalidServer){
+        $("tbody").remove("."+ip);
     }else{
         document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
     }

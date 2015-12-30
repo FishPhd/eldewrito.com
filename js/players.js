@@ -24,7 +24,7 @@ function getTotalPlayers() {
 				$.getJSON("http://" + serverIP, function(serverInfo) {
 					totalPlayers += serverInfo.numPlayers;
 					console.log(totalPlayers);
-					$('#players-online').text(totalPlayers + " Players Online");
+                    $('#players-online').text(totalPlayers + " Players Online");
 				});
 		}
 	});
