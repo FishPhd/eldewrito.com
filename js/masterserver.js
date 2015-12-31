@@ -10,43 +10,27 @@ if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
 $(document).ready(function() {
     updateServerList();
     masterserverLoop();
+    /*
     $("#refresh").click(function() {
         $("#serverlist > tbody").empty();
         updateServerList();
     });
+    */
 });
  
-var masterServers = [
-    {
+var masterServers = [{
         "list": "http://samantha-master.halo.click/list",
         "announce": "http://samantha-master.halo.click/announce",
         "stats": "http://samantha-master.halo.click/stats"
     }, {
-        "list": "http://192.99.124.162/list",
-        "announce": "http://192.99.124.162/announce",
-        "stats": "http://192.99.124.162/stats"
-    }, {
-        "list": "http://eldewrito.red-m.net/list",
-        "announce": "http://eldewrito.red-m.net/announce",
-        "stats": "http://eldewrito.red-m.net/stats"
-    }, {
-        "list": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/list",
-        "announce": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/announce",
-        "stats": "http://kyrluckechuck-dewrito-master-server-kyrluckechuck.c9.io/stats"
-    }, {
-        "list": "http://eldewrito-masterserver-thetwist84.c9.io/list",
-        "announce": "http://eldewrito-masterserver-thetwist84.c9.io/announce",
-        "stats": "http://eldewrito-masterserver-thetwist84.c9.io/stats"
-    }, {
-        "list": "http://eldewrito-masterserver-1-thetwist84.c9.io/list",
-        "announce": "http://eldewrito-masterserver-1-thetwist84.c9.io/announce",
-        "stats": "http://eldewrito-masterserver-1-thetwist84.c9.io/stats"
-    }, {
-        "list": "http://nothing-michaeljohn21312.c9.io/list",
-        "announce": "http://nothing-michaeljohn21312.c9.io/announce",
-        "stats": "http://nothing-michaeljohn21312.c9.io/stats"
-    }
-    ], currentMS = 0, startMS = currentMS;
+        "list": "http://kelly-master.halo.click/list",
+        "announce": "http://kelly-master.halo.click/announce",
+        "stats": "http://kelly-master.halo.click/stats"
+    }, {		
+        "list": "http://eldewrito.red-m.net/list",		
+        "announce": "http://eldewrito.red-m.net/announce",		
+        "stats": "http://eldewrito.red-m.net/stats"		
+    }], currentMS = 0, startMS = currentMS;
  
 function getServerList(success, ms) {
     if (typeof ms !== 'number') ms = startMS = currentMS;
@@ -201,5 +185,5 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
 }
  
 function masterserverLoop() {
-    setInterval(updateServerList, 1000);  
+    setInterval(updateServerList, 2000);  
 }
