@@ -18,15 +18,7 @@ $(document).ready(function() {
     */
 });
  
-var masterServers = [{
-        "list": "http://samantha-master.halo.click/list",
-        "announce": "http://samantha-master.halo.click/announce",
-        "stats": "http://samantha-master.halo.click/stats"
-    }, {
-        "list": "http://kelly-master.halo.click/list",
-        "announce": "http://kelly-master.halo.click/announce",
-        "stats": "http://kelly-master.halo.click/stats"
-    }, {		
+var masterServers = [{		
         "list": "http://eldewrito.red-m.net/list",		
         "announce": "http://eldewrito.red-m.net/announce",		
         "stats": "http://eldewrito.red-m.net/stats"		
@@ -36,11 +28,11 @@ function getServerList(success, ms) {
     if (typeof ms !== 'number') ms = startMS = currentMS;
     ms = Math.min(Math.max(0, ms), masterServers.length);
     $.ajax({
-        url: masterServers[ms].list,
+        url: "http://eldewrito.red-m.net/list",
         dataType: 'json',
         jsonp: false,
         success: function () {
-            if (currentMS != ms) console.log('Now using ' + masterServers[ms].list);
+            if (currentMS != ms) console.log('Now using http://eldewrito.red-m.net/list');
             currentMS = ms;
             success.apply(null, arguments);
         },
