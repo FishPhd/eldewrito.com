@@ -76,10 +76,10 @@ function queryServer(serverIP) {
         //if any variables include js tags, skip them
         if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
             $.ajax({
-                url: 'http://www.telize.com/geoip/' + serverIP.split(':')[0],
+                url: 'https://freegeoip.net/json/' + serverIP.split(':')[0],
                 dataType: 'json',
                 jsonp: false,
-                timeout: 3000,
+                timeout: 2000,
                 success: function (geoloc) {
                     addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer, serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status, serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, geoloc);
                     console.log(serverInfo);
@@ -146,11 +146,11 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
  
-    if (geoloc && geoloc.country_code) name = '[' + sanitizeString(geoloc.country_code) + (geoloc.region_code ? '-' + sanitizeString(geoloc.region_code) : '') + '] ' + name;
+    //if (geoloc && geoloc.country_name) name = '[' + sanitizeString(geoloc.country_name) + '] ' + name;
  
     if (isPassworded) name = '[\uD83D\uDD12] ' + name;
  
-    if (version) name = '[' + version + '] ' + name;
+    //if (version) name = '[' + version + '] ' + name;
  
     var servName = "<td>" + name  + " <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td>" + map + " (" + mapfile + ")" +  "</td>";
@@ -158,11 +158,19 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td>" + status + "</td>";
     var servPlayers = "<td id=\x22" + ip + "\x22 id=\x22player\x22>" + numplayers + "/" + maxplayers + "</td>";
-   
+    var geoip="";
+    
+    if (geoloc && geoloc.region_name && geoloc.country_code) 
+        geoip = "<td>" + geoloc.region_name + " , " + geoloc.country_code + "</td>";
+    else if(geoloc && geoloc.country_code && !geoloc.region_name) 
+        geoip = "<td>" + geoloc.country_code + "</td>";
+    else if(geoloc && geoloc.region_name && !geoloc_country_code) 
+        geoip = "<td>" + geoloc.region_name + "</td>";
+    
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){
-        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus +"</tr>");
+        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + geoip +"</tr>");
     }else{
         document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
     }
