@@ -155,7 +155,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     if (isPassworded) name = '[\uD83D\uDD12] ' + name;
     //if (version) name = '[' + version + '] ' + name;
  
-    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + " <b>(" +  host + "</b>)" + "</td>";
+    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
@@ -180,7 +180,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
-        document.getElementById("Name"+ip).innerHTML = name  + " <b>(" +  host + "</b>)";
+        document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
         document.getElementById("Map"+ip).innerHTML = map + " (" + mapfile + ")";      
         document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>";     
         
@@ -206,5 +206,5 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
 }
  
 function masterserverLoop() {
-    setInterval(updateServerList, 5000);  
+    setInterval(updateServerList, 3000);  
 }
