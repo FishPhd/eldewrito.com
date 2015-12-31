@@ -161,7 +161,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
-    var servGeoip="<td id=\x22GeoIP"+ip+"\x22></td>";
+    var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     
     if (geoloc && geoloc.region_name && geoloc.country_code) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
@@ -186,7 +186,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         
         if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "(Loading)";
         else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "(InLobby)";
-        else  document.getElementById("Status"+ip).innerHTML = status;
+        else document.getElementById("Status"+ip).innerHTML = status;
         
         if (geoloc && geoloc.region_name && geoloc.country_code) 
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name + ", " + geoloc.country_code;
