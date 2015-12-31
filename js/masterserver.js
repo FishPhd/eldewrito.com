@@ -170,13 +170,14 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     else if(geoloc && geoloc.region_name && !geoloc_country_code) 
         geoip = "<td>" + geoloc.region_name + "</td>";
     
+    if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</br>" + "</td>";
+    else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</br>" + "</td>";
+    
+    
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
-    if(document.getElementById(ip) == null){
-        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + geoip +"</tr>");
-    }else{
-        document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
-    }
+    if(document.getElementById(ip) == null) $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + geoip +"</tr>");
+    else document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
    
     /*
     else if(invalidServer){

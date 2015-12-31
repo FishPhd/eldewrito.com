@@ -481,9 +481,10 @@ img.dark {background:#000; opacity:0.5 }
 
 #players-online {
     font-size: 32px;
+    font-family: lato;
     color: #33b5e5;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 2%;
     text-align: center;
 }
 
@@ -540,13 +541,11 @@ img.dark {background:#000; opacity:0.5 }
 /*Tables	
 -----------------------------*/
 table {
-	margin-bottom:0px;
-    border-spacing:0px;
+	margin-bottom:20px;
 }
 
 th {
-	font-weight:bold;
-    text-align: center;
+    font-family: lato;
 }
 
 tbody{
