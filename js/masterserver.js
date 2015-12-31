@@ -152,9 +152,10 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
     
-    if (isPassworded) name = '[\uD83D\uDD12] ' + name;
+    
     //if (version) name = '[' + version + '] ' + name;
- 
+    
+    var servLock = "<td></td>";
     var servName = "<td id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
@@ -162,6 +163,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
+    
+    if (isPassworded) servLock = '<td>\uD83D\uDD12</td>';
     
     if (geoloc && geoloc.region_name && geoloc.country_code) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
@@ -177,7 +180,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById("Players"+ip) == null){ 
-        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
+        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servLock + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
