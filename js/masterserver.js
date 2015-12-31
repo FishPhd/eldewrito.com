@@ -79,7 +79,7 @@ function queryServer(serverIP) {
                 url: 'https://freegeoip.net/json/' + serverIP.split(':')[0],
                 dataType: 'json',
                 jsonp: false,
-                timeout: 2000,
+                timeout: 3000,
                 success: function (geoloc) {
                     addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer, serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status, serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, geoloc);
                     console.log(serverInfo);
@@ -161,7 +161,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var geoip="";
     
     if (geoloc && geoloc.region_name && geoloc.country_code) 
-        geoip = "<td>" + geoloc.region_name + " , " + geoloc.country_code + "</td>";
+        geoip = "<td>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
     else if(geoloc && geoloc.country_code && !geoloc.region_name) 
         geoip = "<td>" + geoloc.country_code + "</td>";
     else if(geoloc && geoloc.region_name && !geoloc_country_code) 
