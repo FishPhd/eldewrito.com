@@ -1,5 +1,5 @@
 var totalPlayers=0;
- 
+
 if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
     connect: function (address) {
         prompt('Use the browser in-game\nOr type/paste this in the console (F1 or `)', 'server.connect ' + address);
@@ -52,6 +52,9 @@ function updateServerList() {
             return;
         }
         console.log(data);
+        if(data.result.servers.length == 0){
+            document.getElementById("players-online").innerHTML = "No Servers!";
+        }
         for(var i = 0; i < data.result.servers.length; i++) {
             var serverIP = data.result.servers[i];
             queryServer(serverIP);
@@ -148,27 +151,24 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     numplayers = parseInt(numplayers);
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
- 
-    //if (geoloc && geoloc.country_name) name = '[' + sanitizeString(geoloc.country_name) + '] ' + name;
- 
+    
     if (isPassworded) name = '[\uD83D\uDD12] ' + name;
- 
     //if (version) name = '[' + version + '] ' + name;
  
-    var servName = "<td>" + name  + " <b>(" +  host + "</b>)" + "</td>";
-    var servMap = "<td>" + map + " (" + mapfile + ")" +  "</td>";
-    var servGameType = "<td>" + gamemode + "</br>" + "</td>";
+    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + " <b>(" +  host + "</b>)" + "</td>";
+    var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
+    var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
-    var servStatus = "<td>" + status + "</td>";
-    var servPlayers = "<td id=\x22" + ip + "\x22 id=\x22player\x22>" + numplayers + "/" + maxplayers + "</td>";
-    var geoip="";
+    var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
+    var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
+    var servGeoip="<td id=\x22GeoIP"+ip+"\x22></td>";
     
     if (geoloc && geoloc.region_name && geoloc.country_code) 
-        geoip = "<td>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
     else if(geoloc && geoloc.country_code && !geoloc.region_name) 
-        geoip = "<td>" + geoloc.country_code + "</td>";
-    else if(geoloc && geoloc.region_name && !geoloc_country_code) 
-        geoip = "<td>" + geoloc.region_name + "</td>";
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.country_code + "</td>";
+    else if(geoloc && geoloc.region_name && !geoloc.country_code) 
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + "</td>";
     
     if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</br>" + "</td>";
     else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</br>" + "</td>";
@@ -176,9 +176,26 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
-    if(document.getElementById(ip) == null) $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + geoip +"</tr>");
-    else document.getElementById(ip).innerHTML = numplayers + "/" + maxplayers;
-   
+    if(document.getElementById("Players"+ip) == null){ 
+        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
+    }else{
+        document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
+        document.getElementById("Name"+ip).innerHTML = name  + " <b>(" +  host + "</b>)";
+        document.getElementById("Map"+ip).innerHTML = map + " (" + mapfile + ")";      
+        document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>";     
+        
+        if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "(Loading)";
+        else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "(InLobby)";
+        else  document.getElementById("Status"+ip).innerHTML = status;
+        
+        if (geoloc && geoloc.region_name && geoloc.country_code) 
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name + ", " + geoloc.country_code;
+        else if(geoloc && geoloc.country_code && !geoloc.region_name)                           
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.country_code;
+        else if(geoloc && geoloc.region_name && !geoloc.country_code)         
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name;                                                                                                                  
+    }
+    
     /*
     else if(invalidServer){
         $("tbody").remove("."+ip);
