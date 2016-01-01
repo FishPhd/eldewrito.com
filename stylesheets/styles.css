@@ -30,6 +30,10 @@
 	font-family: lato;
     src: url('fonts/Lato-Light.woff');
 }
+@font-face {
+	font-family: lato-thin;
+    src: url('fonts/Lato-Thin.woff');
+}
   
 /*
 @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -558,16 +562,26 @@ td, th {
 
 .btn {
     display: inline-block;
+    -webkit-font-smoothing: antialiased;
     font-family: lato;
     font-size: 18px;
     padding: 0.7rem 1.5rem;
-    color: #252525;
+    color: white;
     background-color: #33b5e5;
     border-radius: 4px;
+}
+
+#share-buttons {
+    margin-top: 40px;
+    width: 75px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
 }
 
 .btn:hover
 {
     cursor: pointer;
     background-color: #fff;
+    color: #252525;
 }
