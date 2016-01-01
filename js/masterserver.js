@@ -71,7 +71,7 @@ function updateServerList() {
                 timeout: 3000,
                 error: function () {
                     alert(index + " Does not exist");
-                    $(this).remove();
+                    $(this).closest('tr').remove();
                 }
        });
     });
