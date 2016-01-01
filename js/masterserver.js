@@ -60,6 +60,24 @@ function updateServerList() {
             queryServer(serverIP);
         }
     });
+    
+    $('#serverlist > tbody  > tr').each(function(index){
+        //alert(this.id);
+        $.ajax({
+                url: "http://" + this.id,
+                dataType: 'json',
+                jsonp: false,
+                timeout: 3000,
+                success: function () {
+                },
+                error: function () {
+                    //alert(index + "Does not exist");
+                    var element = document.getElementById(this.id);
+                    element.parentNode.removeChild(element);
+                }
+       });
+    });
+    
     if(totalPlayers==0)
         document.getElementById("players-online").innerHTML = "Loading";
     else    
@@ -152,13 +170,11 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
     
-    
-    
     var servInfo = "<td></td>";
-    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
+    var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
-    var servIP = "<td>" + ip + "</td>";
+    //var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
@@ -180,8 +196,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
-    if(document.getElementById("Players"+ip) == null){ 
-        $('#serverlist > tbody').append("<tr class=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +servVersion +"</tr>");
+    if(document.getElementById(ip) == null){ 
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +servVersion +"</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
@@ -199,12 +215,6 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         else if(geoloc && geoloc.region_name && !geoloc.country_code)         
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name;                                                                                                                  
     }
-    
-    /*
-    else if(invalidServer){
-        $("tbody").remove("."+ip);
-    }
-    */
    
     totalPlayers+=numplayers;
 }
