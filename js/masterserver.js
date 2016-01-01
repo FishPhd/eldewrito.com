@@ -45,7 +45,8 @@ function getServerList(success, ms) {
 }
  
 function updateServerList() {
-    //$("#serverlist > tbody").empty();
+    //$("#serverlist > tbody").empty(); 
+    
     getServerList(function( data ) {
         if(data.result.code != 0) {
             alert("Error received from master: " + data.result.msg);
@@ -61,19 +62,16 @@ function updateServerList() {
         }
     });
     
-    $('#serverlist > tbody  > tr').each(function(index){
+     $('#serverlist > tbody  > tr').each(function(index){
         //alert(this.id);
         $.ajax({
                 url: "http://" + this.id,
                 dataType: 'json',
                 jsonp: false,
                 timeout: 3000,
-                success: function () {
-                },
                 error: function () {
-                    //alert(index + "Does not exist");
-                    var element = document.getElementById(this.id);
-                    element.parentNode.removeChild(element);
+                    alert(index + " Does not exist");
+                    $(this).remove();
                 }
        });
     });
@@ -90,6 +88,7 @@ function queryServer(serverIP) {
     if (!validateIP(serverIP)) return; //this makes more sense here
     var startTime = Date.now();
     $.getJSON("http://" + serverIP, function(serverInfo) {
+        totalPlayers+=serverInfo.numPlayers;
         var timeTaken = Date.now() - startTime;
         console.log(timeTaken);
         if(serverInfo.name === undefined) return;
@@ -100,7 +99,7 @@ function queryServer(serverIP) {
         //if any variables include js tags, skip them
         if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
             $.ajax({
-                url: 'https://freegeoip.net/json/' + serverIP.split(':')[0],
+                url: 'http://ip-api.com/json/' + serverIP.split(':')[0],
                 dataType: 'json',
                 jsonp: false,
                 timeout: 4000,
@@ -174,7 +173,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
-    //var servIP = "<td>" + ip + "</td>";
+    var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
@@ -184,12 +183,12 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
     
-    if (geoloc && geoloc.region_name && geoloc.country_code) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + ", " + geoloc.country_code + "</td>";
-    else if(geoloc && geoloc.country_code && !geoloc.region_name) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.country_code + "</td>";
-    else if(geoloc && geoloc.region_name && !geoloc.country_code) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.region_name + "</td>";
+    if (geoloc && geoloc.regionName && geoloc.countryCode) 
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + ", " + geoloc.countryCode + "</td>";
+    else if(geoloc && geoloc.countryCode && !geoloc.regionName) 
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.countryCode + "</td>";
+    else if(geoloc && geoloc.regionName && !geoloc.countryCode) 
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</td>";
     
     if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</br>" + "</td>";
     else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</br>" + "</td>";
@@ -208,15 +207,13 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "(InLobby)";
         else document.getElementById("Status"+ip).innerHTML = status;
         
-        if (geoloc && geoloc.region_name && geoloc.country_code) 
-            document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name + ", " + geoloc.country_code;
-        else if(geoloc && geoloc.country_code && !geoloc.region_name)                           
-            document.getElementById("GeoIP"+ip).innerHTML = geoloc.country_code;
-        else if(geoloc && geoloc.region_name && !geoloc.country_code)         
-            document.getElementById("GeoIP"+ip).innerHTML = geoloc.region_name;                                                                                                                  
+        if (geoloc && geoloc.regionName && geoloc.countryCode) 
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName + ", " + geoloc.countryCode;
+        else if(geoloc && geoloc.countryCode && !geoloc.regionName)                           
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.countryCode;
+        else if(geoloc && geoloc.regionName && !geoloc.countryCode)         
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName;                                                                                                                  
     }
-   
-    totalPlayers+=numplayers;
 }
  
 function masterserverLoop() {
