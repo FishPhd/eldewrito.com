@@ -194,7 +194,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){ 
-        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +servVersion +"</tr>");
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
