@@ -45,7 +45,19 @@ function getServerList(success, ms) {
 }
  
 function updateServerList() {
-    //$("#serverlist > tbody").empty(); 
+    $('#serverlist > tbody  > tr').each(function(index){
+        //alert(this.id);
+        $.ajax({
+                url: "http://" + this.id,
+                dataType: 'json',
+                jsonp: false,
+                timeout: 3000,
+                error: function () {
+                    //alert(index + " Does not exist");
+                    document.getElementById("serverlist").deleteRow(index);
+                }
+       });
+    });
     
     getServerList(function( data ) {
         if(data.result.code != 0) {
@@ -60,20 +72,6 @@ function updateServerList() {
             var serverIP = data.result.servers[i];
             queryServer(serverIP);
         }
-    });
-    
-     $('#serverlist > tbody  > tr').each(function(index){
-        //alert(this.id);
-        $.ajax({
-                url: "http://" + this.id,
-                dataType: 'json',
-                jsonp: false,
-                timeout: 3000,
-                error: function () {
-                    alert(index + " Does not exist");
-                    $(this).closest('tr').remove();
-                }
-       });
     });
     
     if(totalPlayers==0)
