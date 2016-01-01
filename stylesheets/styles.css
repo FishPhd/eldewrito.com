@@ -579,10 +579,14 @@ td, th {
     border: 0;
     box-shadow: 0;
 }
+#share-buttons:hover{
+    opacity: 0.5;
+}
 
 .btn:hover
 {
     cursor: pointer;
+    opacity: 0.7;
     background-color: #fff;
     color: #252525;
 }
