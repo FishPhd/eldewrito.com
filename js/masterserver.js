@@ -214,9 +214,9 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip + servScore + "</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
-        //document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
+        document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
         document.getElementById("Map"+ip).innerHTML = map + " (" + mapfile + ")";     
-        document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>";  
+        document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>"; 
         document.getElementById("Score1"+ip).innerHTML = teamScore1;  
         document.getElementById("Score2"+ip).innerHTML = teamScore2;
         
