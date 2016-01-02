@@ -10,12 +10,6 @@ if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
 $(document).ready(function() {
     updateServerList();
     masterserverLoop();
-    /*
-    $("#refresh").click(function() {
-        $("#serverlist > tbody").empty();
-        updateServerList();
-    });
-    */
 });
  
 var masterServers = [{		
@@ -198,12 +192,16 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
     
+    
+    
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
     else if(geoloc && geoloc.countryCode && !geoloc.regionName) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.countryCode + "</td>";
     else if(geoloc && geoloc.regionName && !geoloc.countryCode) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</td>";
+    else
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>Service Down</td>";
     
     if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</br>" + "</td>";
     else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</br>" + "</td>";
@@ -228,7 +226,9 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         else if(geoloc && geoloc.countryCode && !geoloc.regionName)                           
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.countryCode;
         else if(geoloc && geoloc.regionName && !geoloc.countryCode)         
-            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName;                                               
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName;   
+        else
+            document.getElementById("GeoIP"+ip).innerHTML = "Service Down";                                             
     }
 }
  
