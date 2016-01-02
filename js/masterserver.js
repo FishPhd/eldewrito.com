@@ -39,20 +39,6 @@ function getServerList(success, ms) {
 }
  
 function updateServerList() {
-    getServerList(function( data ) {
-        if(data.result.code != 0) {
-            alert("Error received from master: " + data.result.msg);
-            return;
-        }
-        console.log(data);
-        if(data.result.servers.length == 0){
-            document.getElementById("players-online").innerHTML = "No Servers!";
-        }
-        for(var i = 0; i < data.result.servers.length; i++) {
-            var serverIP = data.result.servers[i];
-            queryServer(serverIP);
-        }
-    });
     $('#serverlist > tbody  > tr').each(function(index){
         //alert(this.id);
         $.ajax({
@@ -68,6 +54,21 @@ function updateServerList() {
        });
     });
     
+    getServerList(function( data ) {
+        if(data.result.code != 0) {
+            alert("Error received from master: " + data.result.msg);
+            return;
+        }
+        console.log(data);
+        if(data.result.servers.length == 0){
+            document.getElementById("players-online").innerHTML = "No Servers!";
+        }
+        for(var i = 0; i < data.result.servers.length; i++) {
+            var serverIP = data.result.servers[i];
+            queryServer(serverIP);
+        }
+    });
+    
     if(totalPlayers==0)
         document.getElementById("players-online").innerHTML = "Loading";
     else    
@@ -77,19 +78,20 @@ function updateServerList() {
    
 function queryServer(serverIP) {
     console.log(serverIP);
-    
     if (!validateIP(serverIP)) return; //this makes more sense here
     var startTime = Date.now();
     $.getJSON("http://" + serverIP, function(serverInfo) {
        var teamScore1=0;
        var teamScore2=0;
-       totalPlayers+=serverInfo.numPlayers;
+       totalPlayers+=serverInfo.numPlayers; 
        var timeTaken = Date.now() - startTime;
        console.log(timeTaken);
        if(serverInfo.name === undefined) return;
        var isPassworded = serverInfo.passworded !== undefined;
        //if no serverInfo.map, they jumped into an active game without unannouncing their server, causing a duplicate unjoinable game
        if(!serverInfo.map) return;
+       alert(serverIP);
+       /*
        $.each(serverInfo.players, function () {
             if(this["team"]==0 && serverInfo.teams == "true")
                 teamScore1+=this['score'];
@@ -99,14 +101,15 @@ function queryServer(serverIP) {
                 teamScore1=-1;
                 teamScore2=-1;
             }
+            
         });
-        
-        //if any variables include js tags, skip them
-        if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
-            addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
+        */
+        addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
                      serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status,
-                      serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null, teamScore1, teamScore2);
-                      /*
+                      serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null, teamScore1, teamScore2, serverInfo.teams);
+        //alert(timeTaken);
+        /*
+        if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {      
             $.ajax({
                 url: 'http://ip-api.com/json/' + serverIP.split(':')[0],
                 dataType: 'json',
@@ -125,8 +128,10 @@ function queryServer(serverIP) {
                     console.log(serverInfo);
                 } 
             });
-            */
+            
+            
         }
+        */
     });
 }
  
@@ -171,7 +176,7 @@ function invalidServer() {
     }
 }
  
-function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status, numplayers, maxplayers, version, ping, geoloc, teamScore1, teamScore2) {
+function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status, numplayers, maxplayers, version, ping, geoloc, teamScore1, teamScore2, team) {
     name = sanitizeString(name).substring(0,50);
     host = sanitizeString(host).substring(0,50);
     map = sanitizeString(map).substring(0,50);
@@ -183,9 +188,10 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     teamScore2 = parseInt(teamScore2);
     maxplayers = parseInt(maxplayers);
     version = sanitizeString(version).substring(0, 10);
+    team = sanitizeString(team).substring(0, 10);
     
     var servInfo = "<td></td>";
-    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
+    var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     //var servIP = "<td>" + ip + "</td>";
@@ -194,7 +200,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
     var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
-    //var servScore="<td id=\x22Score"+ip+"\x22>" + teamScore1 + "</td>";
+    var servTeam="<td style=\x22text-align: center;\x22 id=\x22Status"+ip+"\x22>" + team + "</td>";
     
     if (version) servVersion = "<td>" + version + "</td>";;
     
@@ -219,7 +225,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){ 
-        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip + servScore + "</tr>");
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip + servTeam + "</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         //document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
