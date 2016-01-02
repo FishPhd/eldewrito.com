@@ -560,7 +560,7 @@ img.dark {background:#000; opacity:0.5 }
 	color:White;
 	margin-bottom:10px;
 	font-size:30px;
-    width: auto;
+    margin-left: 3.5vw;
     height: 100%;
 }
 
@@ -571,9 +571,6 @@ img.dark {background:#000; opacity:0.5 }
 
 /*Tables
 -----------------------------*/
-table {
-	margin-bottom:20px;
-}
 
 th {
     font-family: lato;
