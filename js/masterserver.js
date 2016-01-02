@@ -169,8 +169,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     version = sanitizeString(version).substring(0, 10);
     
     var servInfo = "<td></td>";
-    var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)" + "</td>";
-    var servMap = "<td id=\x22Map"+ip+"\x22>" + map + " (" + mapfile + ")" +  "</td>";
+    var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
+    var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     var servIP = "<td>" + ip + "</td>";
     var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
@@ -183,7 +183,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + ", " + geoloc.countryCode + "</td>";
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
     else if(geoloc && geoloc.countryCode && !geoloc.regionName) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.countryCode + "</td>";
     else if(geoloc && geoloc.regionName && !geoloc.countryCode) 
@@ -207,7 +207,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         else document.getElementById("Status"+ip).innerHTML = status;
         
         if (geoloc && geoloc.regionName && geoloc.countryCode) 
-            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName + ", " + geoloc.countryCode;
+            document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
         else if(geoloc && geoloc.countryCode && !geoloc.regionName)                           
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.countryCode;
         else if(geoloc && geoloc.regionName && !geoloc.countryCode)         
