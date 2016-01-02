@@ -539,7 +539,7 @@ img.dark {background:#000; opacity:0.5 }
     cursor: pointer;
 }
 
-table
+#serverlist
 {
 	color:White;
     table-layout: auto;

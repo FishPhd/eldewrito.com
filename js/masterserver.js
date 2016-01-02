@@ -180,7 +180,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     version = sanitizeString(version).substring(0, 10);
     
     var servInfo = "<td></td>";
-    var servName = "<td id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
+    var servName = "<td id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     //var servIP = "<td>" + ip + "</td>";
