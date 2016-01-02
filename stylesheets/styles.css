@@ -490,22 +490,6 @@ img.dark {background:#000; opacity:0.5 }
 /* =End Update 1.1
 --------------------------------------------------------------------------------------------------------*/
 
-/* TABLES FOR SERVER BROWSER */
-
-.column
-{
-	float: left;
-	width: 100%;
-}
-
-.clear
-{
-	clear: both;
-	overflow: hidden;
-	width: 0;
-	height: 0;
-}
-
 /*Main
 -----------------------------*/
 
@@ -560,7 +544,9 @@ img.dark {background:#000; opacity:0.5 }
 	color:White;
 	margin-bottom:10px;
 	font-size:30px;
-    margin-left: 3.5vw;
+    padding-left: 0px;
+    margin-left: -20px;;
+    width: 100%;
     height: 100%;
 }
 
