@@ -93,11 +93,18 @@ function queryServer(serverIP) {
        //Still needs work
        if(serverInfo.players){
             $.each(serverInfo.players, function () {
-                if(this["team"]==0)
+                if(this["team"]==0 && serverInfo.teams == true)
                     teamScore1+=this['score'];
-                else if(this["team"]==1)
+                else if(this["team"]==1 && serverInfo.teams==true)
                     teamScore2=this['score'];
-            });
+                else if(serverInfo.teams == false){
+                    if(this['score']>teamScore1)    
+                        teamScore1=this['score'];
+                }
+            });    
+        }else{
+            teamScore1=-2;
+            teamScore2=-2;
         }
         addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
                      serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status,
@@ -194,15 +201,15 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
-    var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
+    var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span>-<span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
     var servTeam="<td style=\x22text-align: center;\x22 id=\x22Status"+ip+"\x22>" + team + "</td>";
     
     if (version) servVersion = "<td>" + version + "</td>";;
     
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>'; 
     
-    if(teamScore1==-1 || teamScore2==-1) 
-        servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22font-weight: bold; font-family: lato;\x22>FFA</span></td>";
+    if(teamScore1==-2 || teamScore2==-2) 
+        servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>Private</span></td>";
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
@@ -227,8 +234,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         document.getElementById("Map"+ip).innerHTML = map + "</br> <b> (" + mapfile + "</b>)";    
         document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>"; 
         
-        if(teamScore1==-1 || teamScore2==-1)
-             document.getElementById("Score"+ip).innerHTML = "FFA";
+        if(teamScore1==-2|| teamScore2==-2)
+             document.getElementById("Score"+ip).innerHTML = "Private";
               
         document.getElementById("Score1"+ip).innerHTML = teamScore1;  
         document.getElementById("Score2"+ip).innerHTML = teamScore2;
