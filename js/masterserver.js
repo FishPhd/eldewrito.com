@@ -187,12 +187,9 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
     //var servScore="<td id=\x22Score"+ip+"\x22>" + teamScore1 + "</td>";
     
-    
     if (version) servVersion = "<td>" + version + "</td>";;
     
-    if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
-    
-    
+    if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>'; 
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
@@ -203,8 +200,9 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     else
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>Service Down</td>";
     
-    if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</br>" + "</td>";
-    else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</br>" + "</td>";
+    if(status=="Loading") servGameType = "<td>" + "(Loading)" + "</td>";
+    else if(status=="InLobby") servGameType = "<td>" + "(InLobby)" + "</td>";
+    else if(status==null) servGameType = "<td>" + "(Unkown)"  + "</td>";
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
@@ -217,8 +215,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         document.getElementById("GameType"+ip).innerHTML = gamemode + "</br>"; 
         document.getElementById("Score1"+ip).innerHTML = teamScore1;  
         document.getElementById("Score2"+ip).innerHTML = teamScore2;
-        if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "(Loading)";
-        else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "(InLobby)";
+        if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "Loading";
+        else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "InLobby";
         else document.getElementById("Status"+ip).innerHTML = status;
         
         if (geoloc && geoloc.regionName && geoloc.countryCode) 
