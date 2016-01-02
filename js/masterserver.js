@@ -39,21 +39,6 @@ function getServerList(success, ms) {
 }
  
 function updateServerList() {
-    $('#serverlist > tbody  > tr').each(function(index){
-        //alert(this.id);
-        $.ajax({
-                url: "http://" + this.id,
-                dataType: 'json',
-                jsonp: false,
-                timeout: 3000,
-                error: function () {
-                    //alert(index + " Does not exist");
-                    if(index!=0)
-                        document.getElementById("serverlist").deleteRow(index);
-                }
-       });
-    });
-    
     getServerList(function( data ) {
         if(data.result.code != 0) {
             alert("Error received from master: " + data.result.msg);
@@ -67,6 +52,20 @@ function updateServerList() {
             var serverIP = data.result.servers[i];
             queryServer(serverIP);
         }
+    });
+    $('#serverlist > tbody  > tr').each(function(index){
+        //alert(this.id);
+        $.ajax({
+                url: "http://" + this.id,
+                dataType: 'json',
+                jsonp: false,
+                timeout: 3000,
+                error: function () {
+                    //alert(index + " Does not exist");
+                    if(index!=0)
+                        document.getElementById("serverlist").deleteRow(index);
+                }
+       });
     });
     
     if(totalPlayers==0)
@@ -101,8 +100,13 @@ function queryServer(serverIP) {
                 teamScore2=-1;
             }
         });
+        
         //if any variables include js tags, skip them
         if(!invalidServer(serverInfo.name, serverInfo.variant, serverInfo.variantType, serverInfo.mapFile, serverInfo.maxPlayers, serverInfo.numPlayers, serverInfo.hostPlayer)) {
+            addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
+                     serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status,
+                      serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null, teamScore1, teamScore2);
+                      /*
             $.ajax({
                 url: 'http://ip-api.com/json/' + serverIP.split(':')[0],
                 dataType: 'json',
@@ -119,8 +123,9 @@ function queryServer(serverIP) {
                      serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status,
                       serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null, teamScore1, teamScore2);
                     console.log(serverInfo);
-                }
+                } 
             });
+            */
         }
     });
 }
