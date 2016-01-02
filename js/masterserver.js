@@ -90,16 +90,13 @@ function queryServer(serverIP) {
        var isPassworded = serverInfo.passworded !== undefined;
        //if no serverInfo.map, they jumped into an active game without unannouncing their server, causing a duplicate unjoinable game
        if(!serverInfo.map) return;
+       //Still needs work
        if(serverInfo.players){
             $.each(serverInfo.players, function () {
                 if(this["team"]==0)
                     teamScore1+=this['score'];
                 else if(this["team"]==1)
                     teamScore2=this['score'];
-                else if(serverInfo.teams == "false"){
-                    teamScore1=-1;
-                    teamScore2=-1;
-                }
             });
         }
         addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
@@ -223,7 +220,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){ 
-        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip + servScore + "</tr>");
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servTeam + servScore + "</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         //document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
