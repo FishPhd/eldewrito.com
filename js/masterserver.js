@@ -184,7 +184,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
-    var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
+    var servScore="<td><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
     //var servScore="<td id=\x22Score"+ip+"\x22>" + teamScore1 + "</td>";
     
     if (version) servVersion = "<td>" + version + "</td>";;
