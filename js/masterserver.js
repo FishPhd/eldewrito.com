@@ -54,7 +54,8 @@ function updateServerList() {
                 timeout: 3000,
                 error: function () {
                     //alert(index + " Does not exist");
-                    document.getElementById("serverlist").deleteRow(index);
+                    if(index!=0)
+                        document.getElementById("serverlist").deleteRow(index);
                 }
        });
     });
