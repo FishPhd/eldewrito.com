@@ -84,9 +84,17 @@ function updateServerList() {
    
 function queryServer(serverIP) {
     console.log(serverIP);
+    var teamScore1=0;
+    var teamScore2=0;
     if (!validateIP(serverIP)) return; //this makes more sense here
     var startTime = Date.now();
     $.getJSON("http://" + serverIP, function(serverInfo) {
+        $.each(serverInfo.players, function () {
+            if(this["team"]==0)
+                teamScore1+=this['score'];
+            else if(this["team"]==1)
+                teamScore2=this['score'];
+        });
         totalPlayers+=serverInfo.numPlayers;
         var timeTaken = Date.now() - startTime;
         console.log(timeTaken);
@@ -103,11 +111,15 @@ function queryServer(serverIP) {
                 jsonp: false,
                 timeout: 4000,
                 success: function (geoloc) {
-                    addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer, serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status, serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, geoloc);
+                    addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer, 
+                    serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status, serverInfo.numPlayers, 
+                    serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, geoloc, teamScore1, teamScore2);
                     console.log(serverInfo);
                 },
                 error: function () {
-                    addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer, serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status, serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null);
+                    addServer(serverIP, isPassworded, serverInfo.name, serverInfo.hostPlayer,
+                     serverInfo.map, serverInfo.mapFile, serverInfo.variant, serverInfo.status,
+                      serverInfo.numPlayers, serverInfo.maxPlayers, serverInfo.eldewritoVersion, timeTaken, null, teamScore1, teamScore2);
                     console.log(serverInfo);
                 }
             });
@@ -156,7 +168,7 @@ function invalidServer() {
     }
 }
  
-function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status, numplayers, maxplayers, version, ping, geoloc) {
+function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status, numplayers, maxplayers, version, ping, geoloc, teamScore1, teamScore2) {
     //because people can't be trusted with html, filter it out
     name = sanitizeString(name).substring(0,50);
     host = sanitizeString(host).substring(0,50);
@@ -177,13 +189,14 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
+    var servScore="<td style=\x22text-align: center;\x22><span style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span> - <span style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
     
     if (version) servVersion = "<td>" + version + "</td>";;
     
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + ", <b>" + geoloc.countryCode +"</b>";
     else if(geoloc && geoloc.countryCode && !geoloc.regionName) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.countryCode + "</td>";
     else if(geoloc && geoloc.regionName && !geoloc.countryCode) 
@@ -195,7 +208,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){ 
-        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip +"</tr>");
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servGeoip + servScore + "</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";

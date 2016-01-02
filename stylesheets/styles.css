@@ -558,9 +558,9 @@ img.dark {background:#000; opacity:0.5 }
 #serverlist
 {
 	color:White;
-	margin-bottom:0px;
+	margin-bottom:10px;
 	font-size:30px;
-	width: 100%;
+    width: auto;
     height: 100%;
 }
 
