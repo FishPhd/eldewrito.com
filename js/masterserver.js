@@ -199,7 +199,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     if (isPassworded) servInfo = '<td>\uD83D\uDD12</td>';
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
-        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + ", <b>" + geoloc.countryCode +"</b>";
+        servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
     else if(geoloc && geoloc.countryCode && !geoloc.regionName) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.countryCode + "</td>";
     else if(geoloc && geoloc.regionName && !geoloc.countryCode) 
