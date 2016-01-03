@@ -220,7 +220,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     if(teamScore1==-2 || teamScore2==-2) 
         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>Private</span></td>";
     else if(ffaScore>0)
-        servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22color: #5cd65c; font-family: lato;\x22>"+ffaScore+"</span></td>";
+        servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22color: #ffc080; font-family: lato;\x22>"+ffaScore+"</span></td>";
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
         servGeoip = "<td id=\x22GeoIP"+ip+"\x22>" + geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
