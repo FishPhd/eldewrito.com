@@ -83,6 +83,7 @@ function queryServer(serverIP) {
     $.getJSON("http://" + serverIP, function(serverInfo) {
        var teamScore1=0;
        var teamScore2=0;
+       var ffaScore=0;
        totalPlayers+=serverInfo.numPlayers; 
        var timeTaken = Date.now() - startTime;
        console.log(timeTaken);
@@ -99,7 +100,7 @@ function queryServer(serverIP) {
                     teamScore2+=this['score'];
                 else if(serverInfo.teams == false){
                     if(this['score']>teamScore1)    
-                        teamScore1=this['score'];
+                        ffaScore=this['score'];
                 }
             });    
         }else{
