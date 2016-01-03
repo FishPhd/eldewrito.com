@@ -236,8 +236,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>Loading</span></td>";
     }
     else if(status=="InLobby"){
-         servGameType = "<td>" + "(InLobby)" + "</td>";
-         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>InLobby</span></td>";
+         servGameType = "<td>" + "(In Lobby)" + "</td>";
+         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>In Lobby</span></td>";
     }else if(status==null) servGameType = "<td>" + "(Unkown)"  + "</td>";
     
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
