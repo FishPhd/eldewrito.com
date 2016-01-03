@@ -96,7 +96,7 @@ function queryServer(serverIP) {
                 if(this["team"]==0 && serverInfo.teams == true)
                     teamScore1+=this['score'];
                 else if(this["team"]==1 && serverInfo.teams==true)
-                    teamScore2=this['score'];
+                    teamScore2+=this['score'];
                 else if(serverInfo.teams == false){
                     if(this['score']>teamScore1)    
                         teamScore1=this['score'];
