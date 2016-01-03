@@ -85,7 +85,7 @@ function queryServer(serverIP) {
     $.getJSON("http://" + serverIP, function(serverInfo) {
        var teamScore1=0;
        var teamScore2=0;
-       var ffaScore=0;
+       var ffaScore=-1;
        totalPlayers+=serverInfo.numPlayers; 
        var timeTaken = Date.now() - startTime;
        console.log(timeTaken);
@@ -200,17 +200,17 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     //var servIP = "<td>" + ip + "</td>";
-    var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
+    //var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
     var servPlayers = "<td id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
     var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span>-<span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
-    var servTeam="<td style=\x22text-align: center;\x22 id=\x22Status"+ip+"\x22>"+team+"</td>";
+    var servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>"+team+"</td>";
     
     if(team=="true")
-        servTeam="<td style=\x22text-align: center;\x22 id=\x22Status"+ip+"\x22>True</td>";
+        servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>True</td>";
     else if(team=="false")
-        servTeam="<td style=\x22text-align: center;\x22 id=\x22Status"+ip+"\x22>False</td>";
+        servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>False</td>";
     
         
     if (version) servVersion = "<td>" + version + "</td>";;
@@ -219,7 +219,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     
     if(teamScore1==-2 || teamScore2==-2) 
         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>Private</span></td>";
-    else if(ffaScore>0)
+    else if(ffaScore>-1)
         servScore="<td style=\x22text-align: center;\x22><span id=\x22Score"+ip+"\x22 style=\x22color: #ffc080; font-family: lato;\x22>"+ffaScore+"</span></td>";
     
     if (geoloc && geoloc.regionName && geoloc.countryCode) 
@@ -243,7 +243,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var onclick = (isPassworded ? 'promptPassword' : 'callbacks.connect') + "('" + ip + "');";
    
     if(document.getElementById(ip) == null){ 
-        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servStatus + servTeam + servScore + "</tr>");
+        $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servTeam + servScore + "</tr>");
     }else{
         document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
         //document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
@@ -258,10 +258,11 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         document.getElementById("Score1"+ip).innerHTML = teamScore1;  
         document.getElementById("Score2"+ip).innerHTML = teamScore2;
         
+        /*
         if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "Loading";
         else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "InLobby";
         else document.getElementById("Status"+ip).innerHTML = status;
-        
+        */
         if (geoloc && geoloc.regionName && geoloc.countryCode) 
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
         else if(geoloc && geoloc.countryCode && !geoloc.regionName)                           
