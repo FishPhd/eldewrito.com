@@ -573,6 +573,7 @@ td, th {
     -webkit-font-smoothing: antialiased;
     font-family: lato;
     font-size: 18px;
+    margin:10px;
     padding: 0.7rem 1.5rem;
     color: white;
     background-color: #1D76BC;
@@ -580,8 +581,7 @@ td, th {
 }
 
 #share-buttons {
-    margin-top: 40px;
-    margin-bottom: 15px;
+    margin: 30px 10px 15px 10px;
     width: 75px;
     padding: 5px;
     border: 0;
