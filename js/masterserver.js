@@ -205,12 +205,12 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
     var servScore="<td style=\x22text-align: center;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span>-<span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
-    var servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>"+team+"</td>";
+    var servTeam="<td id=\x22Team"+ip+"\x22>"+team+"</td>";
     
     if(team=="true")
-        servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>True</td>";
+        servTeam="<td id=\x22Team"+ip+"\x22>True</td>";
     else if(team=="false")
-        servTeam="<td style=\x22text-align: center;\x22 id=\x22Team"+ip+"\x22>False</td>";
+        servTeam="<td id=\x22Team"+ip+"\x22>False</td>";
     
         
     if (version) servVersion = "<td>" + version + "</td>";;
