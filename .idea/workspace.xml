@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1ed99ff9-3860-47b0-949d-750447db22d0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/jquery.isotope2.min.js" afterPath="$PROJECT_DIR$/js/jquery.isotope2.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/masterserver.js" afterPath="$PROJECT_DIR$/js/masterserver.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stylesheets/styles.css" afterPath="$PROJECT_DIR$/stylesheets/styles.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="eldewrito.com.iws" />
@@ -26,10 +25,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="masterserver.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="masterserver.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/masterserver.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6752809">
+            <state vertical-scroll-proportion="-41.827587">
               <caret line="261" column="43" selection-start-line="261" selection-start-column="43" selection-end-line="261" selection-end-column="43" />
               <folding>
                 <marker date="1451878718212" expanded="true" signature="8624:8665" placeholder="..." />
@@ -59,8 +58,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-34.846153">
-              <caret line="233" column="3" selection-start-line="233" selection-start-column="3" selection-end-line="233" selection-end-column="3" />
+            <state vertical-scroll-proportion="-13.076923">
+              <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
               <folding>
                 <element signature="n#style#0;n#header#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -106,6 +105,16 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="styles.css" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/stylesheets/styles.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.29325843">
+              <caret line="576" column="14" selection-start-line="576" selection-start-column="14" selection-end-line="576" selection-end-column="14" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="pageTimings.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/pageTimings.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -138,9 +147,10 @@
       <list>
         <option value="$PROJECT_DIR$/js/jquery.touchSwipe.min.js" />
         <option value="$PROJECT_DIR$/js/pageTimings.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/js/jquery.isotope2.min.js" />
         <option value="$PROJECT_DIR$/js/masterserver.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/stylesheets/styles.css" />
       </list>
     </option>
   </component>
@@ -209,7 +219,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="stylesheets" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eldewrito.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="eldewrito.com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -223,6 +247,11 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Samuel\Documents\GitHub\eldewrito.com\images" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
@@ -279,7 +308,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -684,10 +713,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/js/jquery.isotope2.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.9259257">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+          <folding>
+            <marker date="1451878262989" expanded="true" signature="0:27" placeholder="/*...*/" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/masterserver.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-41.827587">
+          <caret line="261" column="43" selection-start-line="261" selection-start-column="43" selection-end-line="261" selection-end-column="43" />
+          <folding>
+            <marker date="1451878718212" expanded="true" signature="8624:8665" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="9375:9394" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="9501:9542" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="9690:9731" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="10461:10483" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="10548:10589" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="10756:10778" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="10845:10886" placeholder="..." />
+            <marker date="1451878718212" expanded="true" signature="11034:11056" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-34.846153">
-          <caret line="233" column="3" selection-start-line="233" selection-start-column="3" selection-end-line="233" selection-end-column="3" />
+        <state vertical-scroll-proportion="-13.076923">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
           <folding>
             <element signature="n#style#0;n#header#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -732,31 +789,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/jquery.isotope2.min.js">
+    <entry file="file://$PROJECT_DIR$/stylesheets/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.9259257">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-          <folding>
-            <marker date="1451878262989" expanded="true" signature="0:27" placeholder="/*...*/" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/masterserver.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6752809">
-          <caret line="261" column="43" selection-start-line="261" selection-start-column="43" selection-end-line="261" selection-end-column="43" />
-          <folding>
-            <marker date="1451878718212" expanded="true" signature="8624:8665" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="9375:9394" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="9501:9542" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="9690:9731" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="10461:10483" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="10548:10589" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="10756:10778" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="10845:10886" placeholder="..." />
-            <marker date="1451878718212" expanded="true" signature="11034:11056" placeholder="..." />
-          </folding>
+        <state vertical-scroll-proportion="0.29325843">
+          <caret line="576" column="14" selection-start-line="576" selection-start-column="14" selection-end-line="576" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
