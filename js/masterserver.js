@@ -248,8 +248,9 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
         if(document.getElementById("Players"+ip)!=null)
             document.getElementById("Players"+ip).innerHTML = numplayers +"/"+ maxplayers;
-        document.getElementById("Map"+ip).innerHTML = map + "</br> <b> (" + mapfile + "</b>)";    
-        document.getElementById("GameType"+ip).innerHTML = gamemode;
+        document.getElementById("Map"+ip).innerHTML = map + "</br> <b> (" + mapfile + "</b>)";
+        if(document.getElementById("GameType"+ip)!=null)
+            document.getElementById("GameType"+ip).innerHTML = gamemode;
 
 
         if(teamScore1==-2|| teamScore2==-2)
