@@ -28,16 +28,17 @@ StartRconConnection = function() {
         }
     };
     dewRcon.dewWebSocket.onmessage = function(message) {
-        dewRcon.lastMessage = message.data;
+        /*dewRcon.lastMessage = message.data;
         console.log(dewRcon.lastMessage);
         console.log(dewRcon.lastCommand);
-        console.log(message.data);
+        console.log(message.data);*/
+        return message.data;
     };
-    dewRcon.dewWebSocket.onclose = function(message) {
-        //jQuery("#connectionStatus").text('Disconnected');
+	dewRcon.dewWebSocket.onclose = function(message) {
+		//jQuery("#connectionStatus").text('Disconnected');
         //console.log(message.code);
-        dewRconConnected = false;
-        disconnectTrigger();
+		dewRconConnected = false;
+		disconnectTrigger();
     };
 }
 var DewRconPortIndex = 0;
@@ -54,7 +55,7 @@ dewRconHelper = function() {
             this.dewWebSocket.send(command);
             this.lastCommand = command;
         } catch (e) {
-            console.log(e);
+			console.log(e);
             dewRconConnected = false;
         }
     }
