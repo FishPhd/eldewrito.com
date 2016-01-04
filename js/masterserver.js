@@ -60,7 +60,7 @@ function updateServerList() {
             alert("Error received from master: " + data.result.msg);
             return;
         }
-        console.log(data);
+        //console.log(data);
         if(data.result.servers.length == 0){
             document.getElementById("players-online").innerHTML = "No Servers!";
             empty=true;
@@ -88,7 +88,7 @@ function queryServer(serverIP) {
        var ffaScore=-1;
        totalPlayers+=serverInfo.numPlayers; 
        var timeTaken = Date.now() - startTime;
-       console.log(timeTaken);
+       //console.log(timeTaken);
        if(serverInfo.name === undefined) return;
        var isPassworded = serverInfo.passworded !== undefined;
        //if no serverInfo.map, they jumped into an active game without unannouncing their server, causing a duplicate unjoinable game
@@ -196,7 +196,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     team = sanitizeString(team).substring(0, 10);
     
     var servInfo = "<td></td>";
-    var servName = "<td style=\x22padding-left:0px;;\x22 id=\x22"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
+    var servName = "<td style=\x22padding-left:0px;;\x22 id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td style=\x22vertical-align:middle;\x22 id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     //var servIP = "<td>" + ip + "</td>";
@@ -213,7 +213,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         servTeam="<td style=\x22vertical-align:middle; id=\x22Team"+ip+"\x22>False</td>";
     
         
-    if (version) servVersion = "<td>" + version + "</td>";;
+    //if (version) servVersion = "<td>" + version + "</td>";;
     
     if (isPassworded) servInfo = '<td style=\x22text-align: center;\x22> \uD83D\uDD12</td>'; 
     
@@ -245,24 +245,28 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     if(document.getElementById(ip) == null){ 
         $('#serverlist > tbody').append("<tr id=\x22" + ip +  "\x22 onclick=\"" + onclick + "\">" + servInfo + servName  + servGameType + servMap +  servPlayers + servTeam + servScore + "</tr>");
     }else{
-        document.getElementById("Players"+ip).innerHTML = numplayers + "/" + maxplayers;
-        //document.getElementById(ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
+        document.getElementById("Name"+ip).innerHTML = name  + "</br> <b>(" +  host + "</b>)";
+        if(document.getElementById("Players"+ip)!=null)
+            document.getElementById("Players"+ip).innerHTML = numplayers +"/"+ maxplayers;
         document.getElementById("Map"+ip).innerHTML = map + "</br> <b> (" + mapfile + "</b>)";    
-        document.getElementById("GameType"+ip).innerHTML = gamemode; 
-        
+        document.getElementById("GameType"+ip).innerHTML = gamemode;
+
+
         if(teamScore1==-2|| teamScore2==-2)
              document.getElementById("Score"+ip).innerHTML = "Private";
         else if(ffaScore>0)
             document.getElementById("Score"+ip).innerHTML = ffaScore;
-            
-        document.getElementById("Score1"+ip).innerHTML = teamScore1;  
-        document.getElementById("Score2"+ip).innerHTML = teamScore2;
-        
+
+        if( document.getElementById("Score1"+ip)!=null)
+            document.getElementById("Score1"+ip).innerHTML = teamScore1;
+        if( document.getElementById("Score2"+ip)!=null)
+            document.getElementById("Score2"+ip).innerHTML = teamScore2;
+
         /*
         if(status=="Loading") document.getElementById("Status"+ip).innerHTML = "Loading";
         else if(status=="InLobby") document.getElementById("Status"+ip).innerHTML = "InLobby";
         else document.getElementById("Status"+ip).innerHTML = status;
-        */
+
         if (geoloc && geoloc.regionName && geoloc.countryCode) 
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName + "</br> <b>" + geoloc.countryCode +"</b>";
         else if(geoloc && geoloc.countryCode && !geoloc.regionName)                           
@@ -270,7 +274,8 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         else if(geoloc && geoloc.regionName && !geoloc.countryCode)         
             document.getElementById("GeoIP"+ip).innerHTML = geoloc.regionName;   
         else
-            document.getElementById("GeoIP"+ip).innerHTML = "Service Down";                                             
+            document.getElementById("GeoIP"+ip).innerHTML = "Service Down";
+         */
     }
 }
  
