@@ -195,13 +195,13 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
     version = sanitizeString(version).substring(0, 10);
     team = sanitizeString(team).substring(0, 10);
     
-    var servInfo = "<td></td>";
+    var servInfo = "<td style=\x22vertical-align:middle;\x22></td>";
     var servName = "<td style=\x22padding-left:0px;;\x22 id=\x22Name"+ip+"\x22>" + name  + "</br> <b>(" +  host + "</b>)</td>";
     var servMap = "<td id=\x22Map"+ip+"\x22>" + map + "</br> <b> (" + mapfile + "</b>)</td>";
     var servGameType = "<td style=\x22vertical-align:middle;\x22 id=\x22GameType"+ip+"\x22>" + gamemode + "</br>" + "</td>";
     //var servIP = "<td>" + ip + "</td>";
     //var servStatus = "<td id=\x22Status"+ip+"\x22>" + status + "</td>";
-    var servPlayers = "<td style=\x22vertical-align:middle; id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
+    var servPlayers = "<td style=\x22vertical-align:middle;\x22 id=\x22Players"+ip+"\x22>" + numplayers + "/" + maxplayers + "</td>";
     var servGeoip="<td id=\x22GeoIP"+ip+"\x22>Loading</td>";
     var servVersion="<td></td>";
     var servScore="<td style=\x22text-align: center;vertical-align:middle;\x22><span id=\x22Score1"+ip+"\x22 style=\x22color: #FD5F5F;font-weight: bold; font-family: lato;\x22>" + teamScore1 + "</span>-<span id=\x22Score2"+ip+"\x22 style=\x22color: cyan; font-weight: bold; font-family: lato;\x22>" + teamScore2 + "</span></td>";
@@ -215,7 +215,7 @@ function addServer(ip, isPassworded, name, host, map, mapfile, gamemode, status,
         
     //if (version) servVersion = "<td>" + version + "</td>";;
     
-    if (isPassworded) servInfo = '<td style=\x22text-align: center;\x22> \uD83D\uDD12</td>'; 
+    if (isPassworded) servInfo = '<td style=\x22vertical-align:middle;\x22> \uD83D\uDD12</td>';
     
     if(teamScore1==-2 || teamScore2==-2) 
         servScore="<td style=\x22text-align: center;vertical-align:middle;\x22><span id=\x22Score"+ip+"\x22 style=\x22 font-family: lato;\x22>Private</span></td>";
