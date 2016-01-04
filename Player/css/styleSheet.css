@@ -1,7 +1,56 @@
 body {
     background-color: transparent;
 }
+.SideButtons {
+    font-size: 16px;
+    font-weight: bold;
+    width: 100px;
+    height: 60px;
+}
 
-table, th, td {
-    border: 1px solid black;
+.armorArms, .armorChest, .armorHelmet, .armorLegs, .armorShoulders{
+    font-size: 14px;
+    font-weight: lighter;
+    width: 100px;
+    height: 30px;
+}
+
+.armorArms, .armorChest, .armorHelmet, .armorLegs, .armorShoulders, .SideButtons {
+    -moz-box-shadow: inset 0px 30px 4px -18px #6e756c;
+    -webkit-box-shadow: inset 0px 30px 4px -18px #6e756c;
+    box-shadow: inset 0px 30px 4px -18px #6e756c;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #303030), color-stop(1, #757575));
+    background: -moz-linear-gradient(top, #303030 5%, #757575 100%);
+    background: -webkit-linear-gradient(top, #303030 5%, #757575 100%);
+    background: -o-linear-gradient(top, #303030 5%, #757575 100%);
+    background: -ms-linear-gradient(top, #303030 5%, #757575 100%);
+    background: linear-gradient(to bottom, #303030 5%, #757575 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#303030', endColorstr='#757575', GradientType=0);
+    background-color: #303030;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Verdana;
+    padding: 1px 1px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #000000;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.armorArms:hover, .armorChest:hover, .armorHelmet:hover, .armorLegs:hover, .armorShoulders:hover, .SideButtons:hover  {
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #757575), color-stop(1, #303030));
+    background:-moz-linear-gradient(top, #757575 5%, #303030 100%);
+    background:-webkit-linear-gradient(top, #757575 5%, #303030 100%);
+    background:-o-linear-gradient(top, #757575 5%, #303030 100%);
+    background:-ms-linear-gradient(top, #757575 5%, #303030 100%);
+    background:linear-gradient(to bottom, #757575 5%, #303030 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#757575', endColorstr='#303030',GradientType=0);
+    background-color:#757575;
+}
+.armorArms:active, .armorChest:active, .armorHelmet:active, .armorLegs:active, .armorShoulders:active, .SideButtons:active {
+    position:relative;
+    top:1px;
 }
