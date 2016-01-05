@@ -1,3 +1,4 @@
+
 var totalPlayers=0;
 
 if (!window.callbacks) window.callbacks = { //not in-game, give helper callbacks
